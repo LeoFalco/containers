@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:11.8
+    container_name: postgres
+    restart: always
+    environment:
+        POSTGRES_DB: metabase
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: test
+    volumes:
+        - postgres_volume:/var/lib/postgresql/data
+    ports:
+        - 5432:5432
+    networks:
+      - bridge_network
+  metabase:
+    image: metabase/metabase
+    container_name: metabase
+    restart: always
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: test
+      MB_DB_HOST: db
+      MB_DB_FILE: /metabase-data/metabase.db
+    depends_on:
+        - db
+    volumes:
+      - metabase_volume:/metabase-data
+    ports:
+      - 3000:3000
+    networks:
+      - bridge_network
+volumes:
+  postgres_volume:
+  metabase_volume:
+networks:
+  bridge:

@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:11.8
+    container_name: postgres
+    restart: always
+    network_mode: host
+    environment:
+      POSTGRES_PASSWORD: test
+      PG_DATA: ~/docker/volumes/postgres/data
+    volumes:
+        - postgres_volume:/var/lib/postgresql/data
+volumes:
+  postgres_volume:
