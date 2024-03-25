@@ -2,6 +2,7 @@ version: "3.7"
 services:
   postgres:
     image: postgres:11.8
+    # image: postgres:15.5 # homolog
     container_name: postgres
     restart: always
     network_mode: host

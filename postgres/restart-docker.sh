@@ -1,3 +1,2 @@
-sudo docker-compose down --remove-orphans
-
-sudo docker-compose up
+docker-compose down --remove-orphans --volumes
+docker-compose up -d
