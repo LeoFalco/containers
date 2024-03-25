@@ -1,14 +1,18 @@
 version: "3.7"
 services:
-  postgres:
-    image: postgres:11.8
-    container_name: postgres
+  eyeofsauron-db:
+    # image: postgis/postgis:12-3.4
+    # image: postgres:15.5 # homolog
+    # image: postgres:10.8 # sammathnaur
+    image: postgres:11.16 # eyeofsauron
+    container_name: eyeofsauron-db
     restart: always
-    network_mode: host
     environment:
       POSTGRES_PASSWORD: test
       PG_DATA: ~/docker/volumes/postgres/data
     volumes:
-        - postgres_volume:/var/lib/postgresql/data
+        - eyeofsauron_volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 volumes:
-  postgres_volume:
+  eyeofsauron_volume:
